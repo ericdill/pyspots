@@ -12,8 +12,15 @@ If you do not have Python installed on your computer, please install python 3.5
 with [Anaconda] (https://www.continuum.io/downloads).  If you have the choice,
 please please please do not install python 2.
 
-After you have installed Python, I would suggest installing pyspots with the
-following command:
+After you have installed Python, I would suggest installing a number of useful
+tools for scientific python:
+
+```
+conda install jupyter numpy matplotlib --yes
+conda install -c lightsource2 lmfit --yes
+```
+
+Then install pyspots:
 
 ```
 pip install pyspots
@@ -45,7 +52,10 @@ via github [here] (https://github.com/themartinlab/pyspots/issues).
 algorithms in to the Java implementation of [Ramdog]
 (https://github.com/themartinlab/ramdog).
 
-- Automatic fitting of individual spotpicking output data
+Here are jupyter notebooks to get your started:
+
+- Load and plot data: examples/Load-and-plot.ipynb
+Load and plot data from one of the Ramdog output files.
 
 
 ## Setting up for Development
