@@ -5,7 +5,7 @@ implementation of Ramdog and rewrite it in Python.
 
 ## Installation
 
-If you do not have Python installed on your computer, please install python 3
+If you do not have Python installed on your computer, please install python 3.5
 with [Anaconda] (https://www.continuum.io/downloads).  If you have the choice,
 please please please do not install python 2.
 

@@ -8,7 +8,7 @@ required = open('requirements.txt').read().split('\n')
 setup(
     name='pyramdog',
     version=versioneer.get_version(),
-    cmdclass=versioneer.get_cmdclass()
+    cmdclass=versioneer.get_cmdclass(),
     description='Analyze 2D Diffraction images',
     author='ericdill',
     author_email='thedizzle@gmail.com',
