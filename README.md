@@ -84,12 +84,12 @@ a tab in your already open default browser.
 
 The page that you are looking for looks like this:
 
-![Jupyter home](docs/jupyter-home.png)
+![Jupyter home](doc/jupyter-home.png)
 
 Click on 'Examples' and then 'Load-and-plot.ipynb' to launch the first
 notebook.
 
-![Load-and-plot](docs/Load-and-plot.png)
+![Load-and-plot](doc/Load-and-plot.png)
 
 ## Setting up for Development
 
