@@ -1,0 +1,3 @@
+include requirements.txt
+include README.mdinclude versioneer.py
+include pyramdog/_version.py
