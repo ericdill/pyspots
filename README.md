@@ -52,11 +52,44 @@ via github [here] (https://github.com/themartinlab/pyspots/issues).
 algorithms in to the Java implementation of [Ramdog]
 (https://github.com/themartinlab/ramdog).
 
-Here are jupyter notebooks to get your started:
+There are example jupyter notebooks that are provided with the [repository
+on github] (https://github.com/ericdill/pyspots) to get your started.  First,
+make sure you have jupyter and all the required dependencies installed:
 
-- Load and plot data: examples/Load-and-plot.ipynb
-Load and plot data from one of the Ramdog output files.
+```
+conda install lmfit jupyter numpy -c lightsource2
+```
 
+Then, clone the repository onto your computer
+
+```
+git clone https://github.com/ericdill/pyspots
+```
+
+Note that the above command will go download the git repository to your
+current directory, so make sure you are in the directory where you want to
+download this git repository before you execute the command to clone the repo.
+
+Now you are ready to open and play with these notebooks!  Navigate to the git
+repository and start jupyter
+
+```
+cd pyspots
+jupyter notebook
+```
+
+One of two things will happen after you execute the above command.  A browser
+will pop up with the jupyter landing page, or, this web page will appear as
+a tab in your already open default browser.
+
+The page that you are looking for looks like this:
+
+![Jupyter home](docs/jupyter-home.png)
+
+Click on 'Examples' and then 'Load-and-plot.ipynb' to launch the first
+notebook.
+
+![Load-and-plot](docs/Load-and-plot.png)
 
 ## Setting up for Development
 
