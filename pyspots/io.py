@@ -78,7 +78,7 @@ def read_spot_summary_file(filepath):
             The total intensity of the spot in the final frame
         x : float
             Sub-pixel resolution spot center in x
-        y :
+        y : float
             Sub-pixel resolution spot center in y
     """
     summaries = []
