@@ -7,3 +7,6 @@ def test_normalized_spot_io():
                         'spots90FQ2_normalized_spot.txt')
     spots = io.read_normalized_file(path)
     assert len(spots) > 0
+
+def test_spot_summary_io():
+    path = os.path.join(os.p)
