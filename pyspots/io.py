@@ -4,7 +4,6 @@ import numpy as np
 # Store each column of output from Ramdog as a 'spot' namedtuple
 spot = namedtuple('spot', ['idx', 'q', 'phi', 'x', 'y', 'data'])
 
-
 def read_normalized_file(filepath):
     """
     Read in the Ramdog output file that ends with '_normalized_spot.txt'
