@@ -1,7 +1,8 @@
 # pyspots
 
 A work in progress to extract the useful bits of the original Java
-implementation of Ramdog and rewrite it in Python.
+implementation of [Ramdog] (https://github.com/themartinlab/Ramdog)
+and rewrite it in Python.
 
 ## Installation
 
