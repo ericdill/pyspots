@@ -14,6 +14,7 @@ setup(
     author_email='thedizzle@gmail.com',
     url='https://github.com/themartinlab/pyspots',
     packages=['pyspots'],
+    package_data={'pyspots': ['data/*.dat']}
     install_requires=required,
     long_description='See ' + 'https://github.com/themartinlab/pyspots',
     license='BSD 3-clause'

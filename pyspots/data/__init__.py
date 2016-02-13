@@ -11,13 +11,13 @@ class _Data():
         d = {}
         self.__dict__ = d
         # find all data files in `datapath`
-        data_files = [f for f in os.listdir(datapath) if f.endswith('.txt')]
+        data_files = [f for f in os.listdir(datapath) if f.endswith('.dat')]
         for data_file in data_files:
             full_path = os.path.join(datapath, data_file)
             # pick the correct io reader
-            if data_file.endswith('normalized_spot.txt'):
+            if data_file.endswith('normalized_spot.dat'):
                 data = read_normalized_file(full_path)
-            elif data_file.endswith('QandPhiandI.txt'):
+            elif data_file.endswith('QandPhiandI.dat'):
                 data = read_spot_summary_file(full_path)
             self.__dict__[os.path.splitext(data_file)[0]] = data
 
