@@ -1,4 +1,4 @@
-from pyramdog import io
+from pyspots import io
 import os
 
 
