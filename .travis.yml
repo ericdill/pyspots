@@ -1,0 +1,47 @@
+language: python
+sudo: false
+
+python:
+  - 2.7
+  - 3.4
+  - 3.5
+
+before_install:
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && bash miniconda.sh -b -p /home/travis/mc && export PATH=/home/travis/mc/bin:$PATH
+
+install:
+  - export GIT_FULL_HASH=`git rev-parse HEAD`
+  - conda config --set always_yes true
+  - conda update conda
+  - conda create -n testenv python=$TRAVIS_PYTHON_VERSION --file requirements.txt
+  - source activate testenv
+  # install deps for testing
+  - conda install pip pytest flake8
+  # # need to build_ext -i for the tests so that the .so is local to the source
+  # # code.  We could also setup.py develop, but I'm not sure if that is any
+  # # better
+  - python setup.py install
+  - pip install coveralls
+  - pip install codecov
+
+script:
+  - py.test -vrsx
+  # - if [ $TRAVIS_PYTHON_VERSION == 3.5 ]; then
+  #     conda install sphinx numpydoc ipython jupyter pip matplotlib;
+  #     pip install sphinx_bootstrap_theme;
+  #     cd ..;
+  #     git clone https://github.com/scikit-beam/scikit-beam-examples.git;
+  #     cd scikit-beam/doc;
+  #     chmod +x build_docs.sh;
+  #     ./build_docs.sh;
+  #   fi;
+  - flake8 $TRAVIS_BUILD_DIR/pyspots
+
+after_success:
+  - coveralls
+  - codecov
+  # - if [ $TRAVIS_BRANCH == 'master' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then
+  #     cd doc;
+  #     chmod +x push_docs.sh;
+  #     ./push_docs.sh;
+  #   fi;
