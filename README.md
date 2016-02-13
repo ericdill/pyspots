@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ericdill/pyspots.svg?branch=master)](https://travis-ci.org/ericdill/pyspots)
+
 # pyspots
 
 A work in progress to extract the useful bits of the original Java
