@@ -1,1 +1,2 @@
+lmfit
 numpy
