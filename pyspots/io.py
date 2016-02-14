@@ -2,7 +2,8 @@ from collections import namedtuple
 import numpy as np
 
 # Store each column of output from Ramdog as a 'spot' namedtuple
-spot = namedtuple('spot', ['idx', 'q', 'phi', 'x', 'y', 'data'])
+spot = namedtuple('spot', ['idx', 'q', 'phi', 'x', 'y', 'data', 'times'])
+
 
 def read_normalized_file(filepath):
     """
@@ -29,6 +30,9 @@ def read_normalized_file(filepath):
             Sub-pixel resolution spot center in y
         data : array
             The intensity data of the spot in all frames
+        times : array
+            The time values of the spot in all frames. Note that this might
+            just be the frame index which runs from 0 to `num_frames`
     """
     spots = []
     with open(filepath, 'r') as f:
@@ -37,8 +41,8 @@ def read_normalized_file(filepath):
     indices = next(gen).split()[1:]
     # Discard the min/max values of the spot because `np.min()` and
     # `np.max()` are a thing
-    min_values = next(gen)
-    max_values = next(gen)
+    next(gen)  # skip the min values
+    next(gen)  # skip the max values
     q_vals = next(gen).split()[1:]
     phi_vals = next(gen).split()[1:]
     x_vals = next(gen).split()[1:]
@@ -49,13 +53,16 @@ def read_normalized_file(filepath):
     times = lines[0]
     # and the data is the rest
     data = np.array(lines[1:], dtype=int)
-    for idx, (q, phi, d, x, y) in enumerate(
-        zip(q_vals, phi_vals, data, x_vals, y_vals)):
-        spots.append(spot(idx, q, phi, x, y, d))
+    for idx, q, phi, d, x, y in zip(
+            indices, q_vals, phi_vals, data, x_vals, y_vals):
+        spots.append(spot(idx, q, phi, x, y, d, times))
 
     return spots
 
+
 spot_summary = namedtuple('spot_summary', ['q', 'phi', 'I', 'x', 'y'])
+
+
 def read_spot_summary_file(filepath):
     """
     Read in the Ramdog output file that ends with '_QandPhiandI.txt'
@@ -80,7 +87,6 @@ def read_spot_summary_file(filepath):
         y : float
             Sub-pixel resolution spot center in y
     """
-    summaries = []
     with open(filepath, 'r') as f:
         lines = f.readlines()
 

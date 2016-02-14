@@ -1,10 +1,11 @@
-from pyspots import io
-import os
+from pyspots.data import data
 
 
 def test_io():
-    from pyspots.data import data
     # split the data into normalized and summary
+    # TODO rework this test to specifically poke the io functions, instead
+    # of indirectly using them through loading the data from the data
+    # subpackage
     norm_spot_data_list = [v for k, v in sorted(data.__dict__.items())
                            if 'normalized' in k]
     summary_data_list = [v for k, v in sorted(data.__dict__.items())
