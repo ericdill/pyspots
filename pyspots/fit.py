@@ -37,24 +37,29 @@ def init_default_avrami_model(init_n=3, init_kA=10**-5, init_t0=0):
     m.set_param_hint('t0', value=init_t0)
     return m
 
-def fit(x, y, fitting_function, params):
-    """Run a fit
 
-    Parameters
-    ----------
-    x : array
-        Independent variable
-    y : array
-        Dependent variable
-        Note: len(x) == len(y)
-    fitting_function : function
-        The model function
-    params : dict
-        Dictionary of initial values for the paramters that 'fitting_function'
-        takes. Can also be `lmfit.Parameters` object
-    """
-    assert len(x) == len(y)
-    x = np.asarray(x)
-    y = np.asarray(y)
-    if params is None:
-        params = model.params
+def do_fit(t, normed):
+    model = init_default_avrami_model()
+    # fit the full dataset to get a good estimate of t0
+    first_fit = model.fit(normed, t=t, t0=1)
+    # then fit it again after we have a good idea of t0, but only fit
+    # alpha < 0.5 and fit until it converges
+    max_calls = 100
+    def is_converged(p1, p2):
+        p1 = abs(p1)
+        p2 = abs(p2)
+        diff = ((p1 - p2) / p1)
+        print("difference between %s and %s is %s" % (p1, p2, diff))
+        return abs(diff) < 0.01
+    first_half = normed < 0.5
+    ncalls = 0
+    fits = [first_fit]
+    prev_fit = first_fit
+    while ncalls < max_calls:
+        new_fit = model.fit(normed[first_half], prev_fit.params, t=t[first_half])
+        fits.append(new_fit)
+        if np.all([is_converged(new_fit.best_values[k], prev_fit.best_values[k]) for k in prev_fit.best_values]):
+            break
+        prev_fit = new_fit
+        ncalls += 1
+    return fits
