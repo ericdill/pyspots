@@ -38,7 +38,7 @@ def read_normalized_file(filepath):
     with open(filepath, 'r') as f:
         gen = (line for line in f.readlines())
 
-    indices = next(gen).split()[1:]
+    indices = (int(float(i)) for i in next(gen).split()[1:])
     # Discard the min/max values of the spot because `np.min()` and
     # `np.max()` are a thing
     next(gen)  # skip the min values
