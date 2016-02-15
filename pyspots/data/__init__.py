@@ -2,7 +2,7 @@ import os
 from pyspots.io import read_normalized_file, read_spot_summary_file
 
 
-class _Data():
+class _Data(object):
     def __init__(self, datapath=None):
         super(_Data, self).__init__()
         # default to the files in this directory
