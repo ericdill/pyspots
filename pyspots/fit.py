@@ -49,16 +49,19 @@ def do_fit(t, normed):
         p1 = abs(p1)
         p2 = abs(p2)
         diff = ((p1 - p2) / p1)
-        print("difference between %s and %s is %s" % (p1, p2, diff))
+        # print("difference between %s and %s is %s" % (p1, p2, diff))
         return abs(diff) < 0.01
     first_half = normed < 0.5
     ncalls = 0
     fits = [first_fit]
     prev_fit = first_fit
     while ncalls < max_calls:
-        new_fit = model.fit(normed[first_half], prev_fit.params, t=t[first_half])
+        new_fit = model.fit(normed[first_half], prev_fit.params,
+                            t=t[first_half])
         fits.append(new_fit)
-        if np.all([is_converged(new_fit.best_values[k], prev_fit.best_values[k]) for k in prev_fit.best_values]):
+        if np.all([is_converged(new_fit.best_values[k],
+                                prev_fit.best_values[k])
+                  for k in prev_fit.best_values]):
             break
         prev_fit = new_fit
         ncalls += 1
