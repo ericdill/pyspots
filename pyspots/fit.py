@@ -27,19 +27,19 @@ def avrami_func(t, kA, t0, n):
     return a
 
 
-def init_default_avrami_model(init_n=3, init_kA=10**-5, init_t0=0):
+def init_default_avrami_model(init_n, init_kA, init_t0, vary_n, vary_kA, vary_t0):
     """Initalize the default Avrami model.  This fixes n to `init_n` and
     forces `kA` to be greater than 0
     """
     m = lmfit.Model(avrami_func)
-    m.set_param_hint('kA', min=0, value=init_kA)
-    m.set_param_hint('n', value=3, vary=False)
-    m.set_param_hint('t0', value=init_t0)
+    m.set_param_hint('kA', min=0, value=init_kA, vary=vary_kA)
+    m.set_param_hint('n', value=3, vary=vary_n)
+    m.set_param_hint('t0', value=init_t0, vary=vary_t0)
     return m
 
 
-def do_fit(t, normed):
-    model = init_default_avrami_model()
+def do_fit(t, normed, n=3, kA=10**-5, t0=0, vary_n=False, vary_kA=True, vary_t0=True):
+    model = init_default_avrami_model(n, kA, t0, vary_n, vary_kA, vary_t0)
     # fit the full dataset to get a good estimate of t0
     first_fit = model.fit(normed, t=t, t0=1)
     # then fit it again after we have a good idea of t0, but only fit
