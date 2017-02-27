@@ -17,7 +17,7 @@ tools for scientific python:
 
 ```
 conda install jupyter numpy matplotlib --yes
-conda install -c lightsource2 lmfit --yes
+conda install -c conda-forge lmfit
 ```
 
 Then install pyspots:
